@@ -52,6 +52,9 @@ string copyString(string str);
 
     # Descrição:
         - Retorna uma string onde str2 é concatenada ao final de str1
+
+        - É necessário desalocar a memória utilizada pelo
+          retorno dessa função
 */
 string concat(string str1, string str2);
 
@@ -120,6 +123,31 @@ int contains(string str1, string str2);
 
 /*
     # Entradas:
+        - origin: string de origem
+        - separator: string que será utilizada
+                     separar origin
+                    
+    # Saída:
+        - string*: Vetor de stirng
+    
+    # Descrição:
+        - origin será separado em sub-strings tendo separator como
+          elemento separador de string
+
+        - As substrings serão armazenadas em uma matriz, onde o
+          último elemento da string será NULL
+        
+        - origin != NULL e strlen(origin) > 0
+
+        - Se separator != NULL, strlen(separator) > 0
+
+        - É necessário desalocar a memória utilizada pelo
+          retorno dessa função
+*/
+string *split(string origin, string separator);
+
+/*
+    # Entradas:
         - num_strings: Quantidade de strings
         - strings: Vetor de strings
         - joiner: string
@@ -131,7 +159,32 @@ int contains(string str1, string str2);
         - Retorna uma string unindo todas as strings
           de strings com joiner sendo colocado entre
           elas
+
+        - É necessário desalocar a memória utilizada pelo
+          retorno dessa função
 */
 string join(int num_strings, string *strings, string joiner);
+
+/*
+    # Entradas:
+        - origin: String base
+        - limit: String limite
+    
+    # Saída:
+        - string
+    
+    # Descrição:
+        - Retorna uma string contendo todos os elementos
+          de origin até a primeira ocorrência de limit
+        
+        - origin != NULL && limit != NULL
+
+        - strlen(limit) > 0
+
+        - EX: origin = "string de teste"
+              limit = "e"
+              saida = "string d"
+*/
+string copyUntil(string origin, string limit);
 
 #endif

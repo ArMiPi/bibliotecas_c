@@ -78,6 +78,8 @@ bool endsWith(string str1, string str2) {
 int contains(string str1, string str2) {
     if(str1 == NULL || str2 == NULL) return -1;
 
+    if(strlen(str2) == 0) return 0;
+
     int size1 = strlen(str1);
     int size2 = strlen(str2);
 
@@ -92,6 +94,83 @@ int contains(string str1, string str2) {
     }
 
     return -1;
+}
+
+/*
+    # Entradas:
+        - origin: String base
+        - target: String procurada
+    
+    # Saída:
+        - int
+    
+    # Descrição:
+        - Retorna o número de vezes que target é encontrado em origin
+
+        - origin != NULL && target != NULL && target != ""
+*/
+int ocurrenciesNumber(string origin, string target) {
+    if(origin == NULL || target == NULL || strcmp(target, "") == 0) return 0;
+
+    // Numero de ocorrências
+    int ocurrencies = 0;
+    
+    // Tamanho de origin
+    int originSize = strlen(origin);
+
+    // Tamanho de target
+    int targetSize = strlen(target);
+    
+    // Percorrer origin em busca de target
+    for(int i = 0, j = 0; i < originSize; i++) {
+        if(origin[i] != target[j]) {
+            if(j != 0) j = 0;
+            continue;
+        }
+        if(i + (targetSize - j) > originSize) break;
+
+        j++;
+        if(j == targetSize) {
+            ocurrencies++;
+            j = 0;
+        }
+    }
+
+    return ocurrencies;
+}
+
+string *split(string origin, string separator) {
+    // Verificar as entradas
+    if(origin == NULL) return NULL;
+    int flag = 0;
+    if(separator == NULL) {
+        separator = copyString(" ");
+        flag = 1;
+    }
+    if(strcmp(separator, "") == 0) return NULL;
+
+    // Definir tamanho do vetor a ser retornado
+    int size = ocurrenciesNumber(origin, separator) + 2;
+    
+    // Alocar vetor de retorno
+    string *splited = (string *) malloc(size * sizeof(string));
+    if(splited == NULL) {
+        printf("ERROR: Could not allocate memory for split() return\n");
+        exit(EXIT_FAILURE);
+    }
+
+    string helper = origin;
+    // Armazenar as substrings no vetor de saída
+    for(int i = 0, increment = 0; i < size - 1; i++) {
+        splited[i] = copyUntil(helper, separator);
+        increment = contains(helper, separator);
+        helper += increment + strlen(separator);
+    }
+    splited[size - 1] = NULL;
+
+    // Retorno
+    if(flag) free(separator);
+    return splited;
 }
 
 string join(int num_strings, string *strings, string joiner) {
@@ -113,4 +192,21 @@ string join(int num_strings, string *strings, string joiner) {
     strcat(final_string, strings[num_strings-1]);
 
     return final_string;
+}
+
+string copyUntil(string origin, string limit) {
+    if(origin == NULL || limit == NULL) return NULL;
+    if(strlen(limit) == 0) return NULL;
+
+    string copy;
+
+    int copySize = contains(origin, limit);
+
+    if(copySize == -1) return copyString(origin);
+
+    copy = newEmptyString(copySize);
+    for(int i = 0; i < copySize; i++) copy[i] = origin[i];
+    copy[copySize] = '\0';
+
+    return copy;
 }
