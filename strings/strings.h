@@ -184,6 +184,9 @@ string join(int num_strings, string *strings, string joiner);
         - EX: origin = "string de teste"
               limit = "e"
               saida = "string d"
+        
+        - É necessário desalocar a memória utilizada pelo
+          retorno dessa função
 */
 string copyUntil(string origin, string limit);
 
