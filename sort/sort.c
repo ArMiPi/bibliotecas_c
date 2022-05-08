@@ -3,36 +3,6 @@
 
 #include"sort.h"
 
-    // for(int i = 0; i < size; i++) printf("%d ", *(int*)((array+(i*size))));
-    // printf("\n");
-
-/*
-    int main()
-    {
-        int array[] = {9, 3, 5, 2, 8, 0};
-        int size = sizeof(array) / sizeof(array[0]);
-        int temp, gap;
-
-        for(gap = 1; gap < size; gap = 3*gap + 1);
-
-        gap = (gap - 1) / 3;
-        for(int k = 0; k < size; k++) printf("%d ", array[k]);
-        printf("\n");
-        while(gap > 0) {
-            for(int i = gap; i < size; i++) {
-                for(int j = i; j >= gap && array[j] < array[j - gap]; j -= gap) {
-                    temp = array[j];
-                    array[j] = array[j-gap];
-                    array[j-gap] = temp;
-                }
-                for(int k = 0; k < size; k++) printf("%d ", array[k]);
-                printf("\n");
-            }
-            gap  = (gap - 1) / 3;
-        }
-    }
-*/
-
 /*
     # Entradas: 
         - *a, *b: Elementos a serem trocados
