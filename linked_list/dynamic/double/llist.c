@@ -1,5 +1,6 @@
 #include<stdio.h>
 #include<stdlib.h>
+#include<stdbool.h>
 
 #include"llist.h"
 
@@ -60,11 +61,12 @@ item InsertStart(llist lst, element elem) {
     lli->next = l->head;
     
     // Posicionar novo item
-    if(!IsListEmpty(lst)) l->head->prev = lli;
+    bool empty = IsListEmpty(lst);
+    if(!empty) l->head->prev = lli;
     l->head = lli;
 
     // Verificar se tail == NULL
-    if(l->tail == NULL) l->tail = l->head;
+    if(empty) l->tail = l->head;
 
     return lli;
 }
